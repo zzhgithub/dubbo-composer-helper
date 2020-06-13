@@ -1,6 +1,8 @@
 package com.startlink.helper;
 
 
+import com.startlink.helper.core.Config;
+import com.startlink.helper.core.Dealer;
 import com.startlink.helper.tools.OptionHelper;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -31,7 +33,11 @@ public class Application {
             System.exit(0);
         }
 
-        
+        Config config = Config.getInstance(result);
+        // tmp 测试打印
+        System.out.println(config);
         // 请求主方法
+        Dealer dealer = new Dealer(config);
+        dealer.deal();
     }
 }
