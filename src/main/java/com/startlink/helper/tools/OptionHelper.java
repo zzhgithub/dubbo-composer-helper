@@ -33,6 +33,12 @@ public class OptionHelper {
                 .desc("生成文件路径")
                 .build());
 
+        res.add(Option.builder("n")
+                .longOpt("name")
+                .hasArg()
+                .desc("name 设置生成物的项目名称 如果不传递 去output的路径名")
+                .build());
+
         res.add(Option.builder("h")
                 .longOpt("help")
                 .desc("[Dubbo Composer] Api Generator Helper")

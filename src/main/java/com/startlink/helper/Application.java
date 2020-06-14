@@ -35,7 +35,7 @@ public class Application {
 
         Config config = Config.getInstance(result);
         // tmp 测试打印
-        System.out.println(config);
+//        System.out.println(config);
         // 请求主方法
         Dealer dealer = new Dealer(config);
         dealer.deal();

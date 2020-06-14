@@ -1,5 +1,6 @@
 package com.startlink.helper.core;
 
+import com.startlink.helper.tools.JavascriptHelper;
 import org.apache.commons.cli.CommandLine;
 
 public class Config {
@@ -9,6 +10,8 @@ public class Config {
     private String targetDir;
     private String outputDir;
     private String classesDir;
+
+    private String appName;
 
     private Config() {
     }
@@ -40,6 +43,12 @@ public class Config {
             System.err.println("请指定输出文件的位置");
             System.exit(0);
         }
+
+        if (commandLine.hasOption("n")) {
+            config.setAppName(commandLine.getOptionValue("n"));
+        } else {
+            config.setAppName(JavascriptHelper.getServiceNameByClassName(config.getOutputDir(), "/"));
+        }
         return config;
     }
 
@@ -66,6 +75,14 @@ public class Config {
 
     public void setClassesDir(String classesDir) {
         this.classesDir = classesDir;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     @Override

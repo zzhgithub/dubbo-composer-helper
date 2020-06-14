@@ -2,6 +2,7 @@ package com.startlink.helper.core;
 
 import com.startlink.helper.tools.FileHelper;
 import com.startlink.helper.tools.JavaClassTransformHelper;
+import com.startlink.helper.tools.JavascriptHelper;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 
@@ -29,8 +30,7 @@ public class Dealer {
         String path = config.getTargetDir() + File.separator + config.getClassesDir();
         File file = new File(path);
         // 存放全部接口数据
-        List<String> services = new ArrayList<>();
-        // todo 创建文件夹
+        List<ServiceDto> services = new ArrayList<>();
         traverse(file, f -> {
             //处理文件
             String fileName = f.getName();
@@ -43,8 +43,11 @@ public class Dealer {
                         jsOutDto = JavaClassTransformHelper.transformClass(javaClass);
                     }
                     if (javaClass.isInterface()) {
-                        //todo 处理接口
-                        jsOutDto = JavaClassTransformHelper.transformClass(javaClass);
+                        jsOutDto = JavaClassTransformHelper.transformInterface(javaClass);
+                        ServiceDto serviceDto = new ServiceDto();
+                        serviceDto.setServiceName(JavascriptHelper.getServiceNameByClassName(javaClass.getClassName()));
+                        serviceDto.setRequireString(JavascriptHelper.getRequireByClassName(javaClass.getClassName()));
+                        services.add(serviceDto);
                     }
 
                     if (Objects.nonNull(jsOutDto)) {
@@ -58,7 +61,9 @@ public class Dealer {
             }
         });
         // 接口数据生成入口文件
+        JavaClassTransformHelper.saveIndex(services, config);
         // 生成 package.json文件
+        JavaClassTransformHelper.savePackageJson(config);
         // Readme 文件
         // todo git忽略文件
     }
