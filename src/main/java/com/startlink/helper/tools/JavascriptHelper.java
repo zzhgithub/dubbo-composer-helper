@@ -74,7 +74,7 @@ public class JavascriptHelper {
      * @return
      */
     public static String getServiceNameByClassName(String className) {
-        return getPackageJsonText(className,".");
+        return getServiceNameByClassName(className,".");
     }
     public static String getServiceNameByClassName(String className,String x) {
         String[] tmp = StringUtils.split(className, x);

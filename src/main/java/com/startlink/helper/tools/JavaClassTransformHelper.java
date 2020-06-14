@@ -84,7 +84,7 @@ public class JavaClassTransformHelper {
         builder.append(JavascriptHelper.ObjectStart);
 
         builder.append("name : ");
-        builder.append("\"" + serviceName + "\"");
+        builder.append("\"" + className + "\"");
         builder.append(",");
 
         builder.append("group : ");
@@ -97,7 +97,7 @@ public class JavaClassTransformHelper {
         builder.append(",");
 
         builder.append("methods : ");
-        builder.append(JavascriptHelper.ListStart);
+        builder.append(JavascriptHelper.ObjectStart);
         // 方法
         Method[] methods = javaClass.getMethods();
         if (methods.length > 0) {
@@ -120,7 +120,7 @@ public class JavaClassTransformHelper {
                 builder.append(",");
             }
         }
-        builder.append(JavascriptHelper.ListEnd);
+        builder.append(JavascriptHelper.ObjectEnd);
         builder.append(",");
 
         builder.append(JavascriptHelper.ObjectEnd);
