@@ -23,7 +23,6 @@ public class GenericSignatureHelper {
         int methodEnd = signature.indexOf(")");
 
         signature = StringUtils.substring(signature, methodStart + 1, methodEnd);
-//        System.out.println(signature);
         List<String> params = splitSign(signature);
         for (String subSign : params) {
             if (subSign.contains("<")) {
@@ -99,14 +98,12 @@ public class GenericSignatureHelper {
                 builder.append(" : ");
                 builder.append(JavascriptHelper.ListStart);
                 String innerType = StringUtils.substring(sign, start + 1, end);
-//                System.out.println(clazzName);
-//                System.out.println(innerType);
                 if (innerType.contains("<")) {
                     //内部还是泛型
                     builder.append(dealGenericSignature(innerType));
                 } else {
                     // 一般类型
-                    String innerClassName = StringUtils.substring(innerType, 1, innerType.length() - 2).replace("/", ".");
+                    String innerClassName = StringUtils.substring(innerType, 1, innerType.length() - 1).replace("/", ".");
                     builder.append(JavascriptHelper.baseAndSimpleObject(innerClassName));
                 }
                 builder.append(JavascriptHelper.ListEnd);

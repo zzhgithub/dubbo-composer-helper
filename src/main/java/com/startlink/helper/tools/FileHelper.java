@@ -19,13 +19,17 @@ public class FileHelper {
         String[] content = file.list();
         for (String name : content) {
             File temp = new File(path, name);
-            if (temp.isDirectory()) {//判断是否是目录
-                deleteAll(temp.getAbsolutePath());
-                temp.delete();//删除空目录
-            } else {
-                if (!temp.delete()) {//直接删除文件
-                    System.err.println("Failed to delete " + name);
-                    System.exit(0);
+            // 过滤 dot 文件
+            if (!name.startsWith(".")) {
+                if (temp.isDirectory()) {
+                    //判断是否是目录
+                    deleteAll(temp.getAbsolutePath());
+                    temp.delete();//删除空目录
+                } else {
+                    if (!temp.delete()) {//直接删除文件
+                        System.err.println("Failed to delete " + name);
+                        System.exit(0);
+                    }
                 }
             }
         }

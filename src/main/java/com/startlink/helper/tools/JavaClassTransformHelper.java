@@ -27,7 +27,7 @@ public class JavaClassTransformHelper {
     public static JsOutDto transformClass(JavaClass javaClass) {
         JsOutDto jsOutDto = new JsOutDto();
         // package Name 用于生成路径
-        String pakageName = javaClass.getPackageName();
+//        String pakageName = javaClass.getPackageName();
         // 用于生成文件名和
         String className = javaClass.getClassName();
 
@@ -137,6 +137,12 @@ public class JavaClassTransformHelper {
 
     public static void saveIndex(List<ServiceDto> serviceDtoList, Config config) {
         StringBuilder builder = new StringBuilder();
+
+        // 添加全局路径
+        builder.append(JavascriptHelper.RootDir);
+        builder.append(" = ");
+        builder.append(JavascriptHelper.DirName);
+        builder.append(";\n");
 
         for (ServiceDto serviceDto : serviceDtoList) {
             builder.append(JavascriptHelper.Const);

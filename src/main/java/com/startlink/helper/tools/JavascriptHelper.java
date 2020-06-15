@@ -33,6 +33,9 @@ public class JavascriptHelper {
     public static final String Latest = "LATEST";
     public static final String ParamsType = "paramsType";
 
+    // 全局本项目路径
+    public static final String RootDir = "global.rootDir";
+
     public static String baseAndSimpleObject(String typeName) {
         StringBuilder builder = new StringBuilder();
         // java.lang下的基础类型使用这种方法进行存储
@@ -62,7 +65,7 @@ public class JavascriptHelper {
 
     public static String getRequireByClassName(String className) {
         return RequireStart
-                + DirName + " + \"/"
+                + RootDir + " + \"/"
                 + getPatchByClassName(className)
                 + RequireEnd;
     }
